@@ -1,6 +1,6 @@
 import React, {useState, Fragment} from 'react';
-import {CircularProgress} from "@material-ui/core";
-import {useSnackbar} from "notistack";
+import Loader from "./loader";
+import PropTypes from 'prop-types';
 
 const style = {
     'display': 'inline-flex',
@@ -8,7 +8,7 @@ const style = {
     'outline': 'none',
     'overflowX': 'hidden',
     'width': 'auto',
-    'maxWidth': 'calc(100% - 16px)',
+    'maxWidth': 'calc(100% - 22px)',
     "borderRadius": "4px",
     "margin": "0 4px 0 0",
     "padding": "0 4px 0 4px",
@@ -49,7 +49,7 @@ const InputMode = ({title, setTitle, dropTitle, updateHandler}) => {
 
 const TextMode = ({enableEditable, title, loading}) => {
 
-    const loader = loading && <CircularProgress size={12}/>
+    const loader = loading && <Loader/>
     const setBackground = (e) => {
         e.target.style.background = '#e6e4e4';
     }
@@ -72,9 +72,9 @@ const TextMode = ({enableEditable, title, loading}) => {
     )
 }
 
-const InlineEdit = ({initTitle, onEdit}) => {
+const InlineEdit = ({initTitle, onEdit, onSuccess, onFail}) => {
 
-    const {enqueueSnackbar} = useSnackbar();
+    
     const [isEditable, setEditable] = useState(false);
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState(initTitle);
@@ -99,11 +99,12 @@ const InlineEdit = ({initTitle, onEdit}) => {
             setLoading(true);
             try{
                 await onEdit(newData);
-                enqueueSnackbar("Заголовок обновлен", { variant: "success" });
+                onSuccess();
+                // enqueueSnackbar("Заголовок обновлен", { variant: "success" });
                 setLoading(false);
             }
             catch (err) {
-                enqueueSnackbar(err, { variant: "error" });
+                onFail(err);
                 dropTitle();
                 setLoading(false);
             }
@@ -128,6 +129,17 @@ const InlineEdit = ({initTitle, onEdit}) => {
             {mode}
         </Fragment>
     );
+}
+
+
+InlineEdit.propTypes = {
+    initTitle: PropTypes.string.isRequired,
+    onEdit: PropTypes.func.isRequired
+}
+
+InlineEdit.defaultProps = {
+    onSuccess: () => {return true},
+    onFail: () => {return true}
 }
 
 

@@ -1,0 +1,28 @@
+.loader {
+  width: 16px;
+  height: 12px;
+  display: inline-flex;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.loader div {
+  position: absolute;
+  width:  13px;
+  height: 13px;
+  border: 1.5px solid #889496;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: loader-curve 0.7s linear infinite;
+}
+
+@keyframes loader-curve {
+  0% { 
+    transform: rotate(0deg); 
+  }
+  100% { 
+    transform: rotate(360deg); 
+  }
+}

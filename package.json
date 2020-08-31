@@ -1,6 +1,6 @@
 {
   "name": "inline-edit-react",
-  "version": "1.0.0",
+  "version": "1.0.6",
   "description": "simple react inline title editor",
   "main": "./build/index.js",
   "scripts": {
@@ -22,8 +22,6 @@
   },
   "homepage": "https://github.com/quetalse/inline-edit-react#readme",
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
-    "notistack": "^1.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
