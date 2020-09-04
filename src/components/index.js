@@ -1,19 +1,17 @@
 import React, {useState, Fragment} from 'react';
-import Loader from "./loader";
+import Loader from "./loader/loader";
 import PropTypes from 'prop-types';
+import './index.css';
 
-const style = {
-    'display': 'inline-flex',
-    'border': 'none',
-    'outline': 'none',
-    'overflowX': 'hidden',
-    'width': 'auto',
-    'maxWidth': 'calc(100% - 22px)',
-    "borderRadius": "4px",
-    "margin": "0 4px 0 0",
-    "padding": "0 4px 0 4px",
-    "whiteSpace": "nowrap"
-}
+// const style = {
+    // 'display': 'inline-flex',
+    // 'outline': 'none',
+    // 'overflowX': 'hidden',
+    // 'width': 'auto',
+    // 'maxWidth': 'calc(100% - 22px)',
+    // "borderRadius": "4px",
+    // "whiteSpace": "nowrap"
+// }
 
 const InputMode = ({title, setTitle, dropTitle, updateHandler}) => {
 
@@ -23,9 +21,7 @@ const InputMode = ({title, setTitle, dropTitle, updateHandler}) => {
 
     const keyDownHandler = (event) => {
         if(event.key === 'Enter'){
-            updateHandler({
-                title: title
-            });
+            updateHandler(title);
         }
         if (event.key === 'Escape'){
             dropTitle();
@@ -33,17 +29,16 @@ const InputMode = ({title, setTitle, dropTitle, updateHandler}) => {
     }
 
     return (
-        <span>
-            <input
-                type="text"
-                value={title}
-                style={{...style, 'width': '100%', 'maxWidth': '100%', 'backgroundColor': '#e6e4e4'}}
-                onChange={changeHandler}
-                onBlur={dropTitle}
-                autoFocus={true}
-                onKeyDown={keyDownHandler}
-            />
-        </span>
+        <input
+            className="input-mode"
+            type="text"
+            value={title}
+            // style={{...style}}
+            onChange={changeHandler}
+            onBlur={dropTitle}
+            autoFocus={true}
+            onKeyDown={keyDownHandler}
+        />
     )
 }
 
@@ -52,15 +47,19 @@ const TextMode = ({enableEditable, title, loading}) => {
     const loader = loading && <Loader/>
     const setBackground = (e) => {
         e.target.style.background = '#e6e4e4';
+        e.target.style.color = '#212121';
+        e.target.style.borderRadius = '8px';
+        e.target.style.padding = '0 6px';
     }
     const clearBackground = (e) => {
         e.target.style.background = 'none';
+        e.target.style.color = 'inherit';
     }
 
     return (
         <Fragment>
             <span
-                style={style}
+                className="text-mode"
                 onMouseOver={setBackground}
                 onMouseLeave={clearBackground}
                 onClick={enableEditable}
@@ -72,12 +71,23 @@ const TextMode = ({enableEditable, title, loading}) => {
     )
 }
 
-const InlineEdit = ({initTitle, onEdit, onSuccess, onFail}) => {
+const InlineEdit = ({initTitle, onEdit, onSuccess, onFail, align}) => {
 
-    
     const [isEditable, setEditable] = useState(false);
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState(initTitle);
+    const titleAlign = () => {
+        switch(align){
+            case "center":
+                return "ier-center"
+            case "left":
+                return "ier-left"
+            case "right":
+                return "ier-right"
+            default:
+                return "ier-center"
+        }
+    }
 
     const enableEditable = () => {
         setEditable(true);
@@ -92,7 +102,7 @@ const InlineEdit = ({initTitle, onEdit, onSuccess, onFail}) => {
     }
 
     const updateHandler = async (newData) => {
-        if(newData.title.trim() === initTitle){
+        if(newData.trim() === initTitle){
             dropTitle()
         }else{
             disableEditable();
@@ -100,7 +110,6 @@ const InlineEdit = ({initTitle, onEdit, onSuccess, onFail}) => {
             try{
                 await onEdit(newData);
                 onSuccess();
-                // enqueueSnackbar("Заголовок обновлен", { variant: "success" });
                 setLoading(false);
             }
             catch (err) {
@@ -125,16 +134,17 @@ const InlineEdit = ({initTitle, onEdit, onSuccess, onFail}) => {
         />
 
     return (
-        <Fragment>
+        <div className={`wrapper ${titleAlign()}`}>
             {mode}
-        </Fragment>
+        </div>
     );
 }
 
 
 InlineEdit.propTypes = {
     initTitle: PropTypes.string.isRequired,
-    onEdit: PropTypes.func.isRequired
+    onEdit: PropTypes.func.isRequired,
+    align: PropTypes.oneOf(['center', 'left', 'right'])
 }
 
 InlineEdit.defaultProps = {

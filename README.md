@@ -7,7 +7,8 @@ Simple react inline title editor
 - Highlight editable area;
 - Enabling editing mode by clicking;
 - Saving changes by Enter;
-- Success and error handlers.
+- Success and error handlers;
+- Choose of text alignment in the container.
 
 ### Important links:
 
@@ -34,12 +35,15 @@ Simple react inline title editor
 			alert(`error: ${err}`);
 		}
 
+		onEdit = ()
+
 		return (
 			<InlineEdit 
-				initialTitle = {title}
+				initTitle = {title}
 				onEdit = {asyncEditHandler}
 				onSuccess = {onSuccess}
 				onFail = {onFail}
+				align = 'left' // ['left', 'center', 'right']
 			</InlineEdit>
 		)
 	}

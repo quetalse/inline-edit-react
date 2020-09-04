@@ -1,0 +1,41 @@
+.wrapper{
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 98%;
+}
+
+.input-mode{
+	background-color: #e6e4e4;
+	border: none;
+	border-radius: 6px;
+	font-family: inherit;
+	font-size: inherit;
+	max-width: 100%;
+	overflow-x: hidden;
+	outline: none;
+	padding: 0 6px; 
+	white-space: nowrap;
+	width: 100%;	
+}
+
+.text-mode{
+    max-width: calc(100% - 30px);
+	margin-right: 4px;	
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ier-center{
+	justify-content: center;
+}
+
+.ier-left{
+	justify-content: flex-start;
+}
+
+.ier-right{
+	justify-content: flex-end;
+}	

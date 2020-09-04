@@ -1,7 +1,8 @@
 var path = require('path');
 
 module.exports = {
-	mode: "production",
+	// mode: "production",
+	mode: 'none',
 	entry: "./src/components/index.js",
 	output: {
 		path: path.resolve("build"),
@@ -22,7 +23,6 @@ module.exports = {
 		]
 	},
 	externals: {
-		react: "react",
-		notistack: "notistack"
+		react: "react"
 	}
 }

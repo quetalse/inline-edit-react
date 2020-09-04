@@ -1,7 +1,6 @@
 .loader {
   width: 16px;
-  height: 12px;
-  display: inline-flex;
+  height: 16px;
   position: relative;
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
@@ -9,13 +8,15 @@
 }
 
 .loader div {
-  position: absolute;
-  width:  13px;
-  height: 13px;
-  border: 1.5px solid #889496;
+  animation: loader-curve 0.8s linear infinite;
+  border: 2px solid;
   border-top-color: transparent;
   border-radius: 50%;
-  animation: loader-curve 0.7s linear infinite;
+  box-sizing: border-box;
+  filter: invert(50%);
+  position: absolute;
+  height: 16px;
+  width: 16px;
 }
 
 @keyframes loader-curve {
