@@ -1,8 +1,8 @@
 var path = require('path');
 
 module.exports = {
-	// mode: "production",
-	mode: 'none',
+	mode: "production",
+	// mode: 'none',
 	entry: "./src/components/index.js",
 	output: {
 		path: path.resolve("build"),

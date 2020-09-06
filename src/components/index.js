@@ -3,16 +3,6 @@ import Loader from "./loader/loader";
 import PropTypes from 'prop-types';
 import './index.css';
 
-// const style = {
-    // 'display': 'inline-flex',
-    // 'outline': 'none',
-    // 'overflowX': 'hidden',
-    // 'width': 'auto',
-    // 'maxWidth': 'calc(100% - 22px)',
-    // "borderRadius": "4px",
-    // "whiteSpace": "nowrap"
-// }
-
 const InputMode = ({title, setTitle, dropTitle, updateHandler}) => {
 
     const changeHandler = (e) => {
@@ -117,6 +107,7 @@ const InlineEdit = ({initTitle, onEdit, onSuccess, onFail, align}) => {
                 dropTitle();
                 setLoading(false);
             }
+            setTitle(newData);
         }
     };
 
@@ -148,6 +139,7 @@ InlineEdit.propTypes = {
 }
 
 InlineEdit.defaultProps = {
+    initTitle: '',
     onSuccess: () => {return true},
     onFail: () => {return true}
 }
