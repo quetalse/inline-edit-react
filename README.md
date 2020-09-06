@@ -4,6 +4,10 @@ Simple react inline title editor
 
 ![alt text](https://david-dm.org/quetalse/inline-edit-react.svg)
 
+### Demo:
+
+![](https://s8.gifyu.com/images/inline-edit-react.gif)
+
 ### Features:
 
 - Highlight editable area;
@@ -30,10 +34,6 @@ onSuccess | No | function | () => {return true} | Handles an success: () => {ale
 * Safari - 13.1+;
 * IE - 11 (Partial support);
 * Edge - 84;
-
-### Demo:
-
-![](inline-edit-react.gif)
 
 ### Installing as a package:
 
